@@ -25,7 +25,7 @@ def parse_arguments():
         type=int,
         required=True,
         help='Index of slurm')
-
+    parser.add_argument(
         '--instance',
         type=str,
         required=True,

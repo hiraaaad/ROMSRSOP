@@ -20,6 +20,7 @@ def parse_arguments():
         type=str,
         required=True,
         help='algorithm')
+    parser.add_argument(
         '--seed',
         default=0,
         type=int,
@@ -99,24 +100,24 @@ if __name__ == '__main__':
 , 194817, 318576, 98816, 312131, 22585, 889346, 900289, 789335, 25676, 591257
 , 839707])
 
-        for idx_batch in batch_range:
-            solver = Parallel_Controller(problem=problem, greedy_param = int(conf_params['Greedy parameter']), selection_pressure=float(conf_params['SP']), ant_kw=None)
-            try:
-                seed = preseed[idx_batch]
-                # print(seed)
-                solver.problem.initialise_seed(seed=seed)
-            except:
-                raise Exception('Problem in seed initialisation')
+    for idx_batch in batch_range:
+        solver = Parallel_Controller(problem=problem, greedy_param = int(conf_params['Greedy parameter']), selection_pressure=float(conf_params['SP']), ant_kw=None)
+        try:
+            seed = preseed[idx_batch]
+            # print(seed)
+            solver.problem.initialise_seed(seed=seed)
+        except:
+            raise Exception('Problem in seed initialisation')
 
-            solver.run()
-            print('Best-solution: {}'.format(solver.total_obj))
-            obj_batch.append(solver.total_obj)
-            # str_alg = '({},{})'.format(args.greedy_param, args.sp)
-            # solver.export_best_solution_simple()
-            # solver.export()
+        solver.run()
+        print('Best-solution: {}'.format(solver.total_obj))
+        obj_batch.append(solver.total_obj)
+        # str_alg = '({},{})'.format(args.greedy_param, args.sp)
+        # solver.export_best_solution_simple()
+        # solver.export()
 
     if args.method == 'RGA':
-		 str_save = './raw_rga/RGA_({}-{}-{}).csv'.format(n_demand, n_machine, direction)
+        str_save = './raw_rga/RGA_({}-{}-{}).csv'.format(n_demand, n_machine, direction)
 
     np.savetxt(str_save,obj_batch,delimiter=',',fmt='%10.5f')
     print('RGA {}: csv save: succssful'.format(args.instance))

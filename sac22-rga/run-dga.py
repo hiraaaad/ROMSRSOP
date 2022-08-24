@@ -62,7 +62,7 @@ if __name__ == '__main__':
 
 
     if args.method == 'DGA':
-		str_save = './raw_dga/DGA_({}-{}-{}).csv'.format(n_demand, n_machine, direction)
+        str_save = './raw_dga/DGA_({}-{}-{}).csv'.format(n_demand, n_machine, direction)
 
     np.savetxt(str_save,obj_batch,delimiter=',',fmt='%10.5f')
     print('DGA {}: csv save: succssful'.format(args.instance))
